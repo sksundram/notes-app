@@ -35,6 +35,18 @@ const removeNote = title => {
   }
 };
 
+// List all notes
+const listNotes = () => {
+  const notes = loadNotes();
+
+  if (notes.length > 0) {
+    console.log(chalk.magenta('Your Notes:'));
+    notes.forEach(note => console.log(chalk.gray(note.title)));
+  } else {
+    console.log(chalk.red('There are no notes'));
+  }
+};
+
 // Take an array of notes and write it to a file
 const saveNotes = notes => {
   // Convert to string
@@ -58,4 +70,4 @@ const loadNotes = () => {
   }
 };
 
-module.exports = { addNote, removeNote };
+module.exports = { addNote, removeNote, listNotes };
