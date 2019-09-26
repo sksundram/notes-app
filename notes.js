@@ -7,10 +7,10 @@ const addNote = (title, body) => {
   // Load notes
   const notes = loadNotes();
 
-  // Check for dulplicate notes title
-  const duplicateTitle = notes.find(note => note.title === title);
+  // Check for dulplicate notes
+  const duplicateNote = notes.find(note => note.title === title);
 
-  if (!duplicateTitle) {
+  if (!duplicateNote) {
     // Add new note to notes array
     notes.push({ title, body });
 
@@ -47,6 +47,19 @@ const listNotes = () => {
   }
 };
 
+// Read a note
+const readNote = title => {
+  const notes = loadNotes();
+  const note = notes.find(note => note.title === title);
+
+  if (note) {
+    console.log(chalk.bold.green(note.title));
+    console.log(note.body);
+  } else {
+    console.log(chalk.red('Note not found'));
+  }
+};
+
 // Take an array of notes and write it to a file
 const saveNotes = notes => {
   // Convert to string
@@ -70,4 +83,4 @@ const loadNotes = () => {
   }
 };
 
-module.exports = { addNote, removeNote, listNotes };
+module.exports = { addNote, removeNote, listNotes, readNote };
