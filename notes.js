@@ -1,5 +1,6 @@
 // Initialize modules
 const fs = require('fs');
+const chalk = require('chalk');
 
 // Add a new note
 const addNote = (title, body) => {
@@ -15,9 +16,22 @@ const addNote = (title, body) => {
 
     // Save the notes array
     saveNotes(notes);
-    console.log('New note added');
+    console.log(chalk.green('New note added'));
   } else {
-    console.log('Note title taken');
+    console.log(chalk.red('Note title taken'));
+  }
+};
+
+// Remove a note
+const removeNote = title => {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter(note => note.title !== title);
+
+  if (notes.length === notesToKeep.length) {
+    console.log(chalk.red('Note not found'));
+  } else {
+    saveNotes(notesToKeep);
+    console.log(chalk.green('Note removed'));
   }
 };
 
@@ -44,4 +58,4 @@ const loadNotes = () => {
   }
 };
 
-module.exports = { addNote };
+module.exports = { addNote, removeNote };
